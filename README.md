@@ -32,7 +32,6 @@ Allows users to add reviews of their favorite restaurants and view them later on
 
 ## TODO
 
-- implement update functionality for reviews using wizard modal
 - fix google places api issue - migrate to the newer version
 - implement user authentication
 - allow users to sort reviews based on a set of criteria
