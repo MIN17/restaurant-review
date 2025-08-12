@@ -34,6 +34,7 @@ export const ViewReviews = () => {
   });
 
   useEffect(() => {
+    console.log("start");
     getReviews();
   }, []);
 
@@ -221,43 +222,47 @@ export const ViewReviews = () => {
   );
 
   // list of reviews
-  const reviews = tableData.map((row, idx) => {
-    // generate the list of stars (ratings)
-    const stars = [];
+  let reviews: any = [];
+  console.log(tableData);
+  if (Array.isArray(tableData)) {
+    reviews = tableData.map((row, idx) => {
+      // generate the list of stars (ratings)
+      const stars = [];
 
-    for (let i = 0; i < row.rating; i++) {
-      stars.push(<span key={i + 1}>&#9733;</span>);
-    }
+      for (let i = 0; i < row.rating; i++) {
+        stars.push(<span key={i + 1}>&#9733;</span>);
+      }
 
-    return (
-      <div
-        key={`row-${idx}`}
-        className="p-2 mb-2 lg:mb-0 border-solid border-[0.05rem] rounded-lg border-green-500"
-      >
-        <div className="flex justify-between">
-          <span>{row.name}</span>
-          <span className="flex items-center">
-            <div className="ml-2 mr-2 text-amber-300">{stars}</div>
-            <div className="flex text-right">
-              <BsPencilSquare
-                className="cursor-pointer align-middle"
-                key={`edit-${idx}`}
-                onClick={() => handleEdit(row)}
-              />
+      return (
+        <div
+          key={`row-${idx}`}
+          className="p-2 mb-2 lg:mb-0 border-solid border-[0.05rem] rounded-lg border-green-500"
+        >
+          <div className="flex justify-between">
+            <span>{row.name}</span>
+            <span className="flex items-center">
+              <div className="ml-2 mr-2 text-amber-300">{stars}</div>
+              <div className="flex text-right">
+                <BsPencilSquare
+                  className="cursor-pointer align-middle"
+                  key={`edit-${idx}`}
+                  onClick={() => handleEdit(row)}
+                />
 
-              <BsFillTrashFill
-                className=" cursor-pointer align-middle text-red-400"
-                key={`delete-${idx}`}
-                onClick={() => deleteReviews(row)}
-              />
-            </div>
-          </span>
+                <BsFillTrashFill
+                  className=" cursor-pointer align-middle text-red-400"
+                  key={`delete-${idx}`}
+                  onClick={() => deleteReviews(row)}
+                />
+              </div>
+            </span>
+          </div>
+          <div className="mb-4 italic text-gray-500">{row.address}</div>
+          <div className="">{row.review}</div>
         </div>
-        <div className="mb-4 italic text-gray-500">{row.address}</div>
-        <div className="">{row.review}</div>
-      </div>
-    );
-  });
+      );
+    });
+  }
 
   return (
     <>

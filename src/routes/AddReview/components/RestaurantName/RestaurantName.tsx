@@ -1,4 +1,4 @@
-import Autocomplete from "react-google-autocomplete";
+// import Autocomplete from "react-google-autocomplete";
 
 interface RestaurantNameProp {
   name: string;
@@ -17,7 +17,7 @@ interface RestaurantNameProp {
 // restaurant name portion of the input form in the AddReview page
 export const RestaurantName = ({
   name,
-  setReview,
+  // setReview,
   handleChange,
 }: RestaurantNameProp) => {
   return (
