@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@/components/Button";
+import { Modal } from "@/components/Modal";
+import { Save } from "react-feather";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 
@@ -21,24 +23,37 @@ const baseUrl: string = isProduction
 export const ViewReviews = () => {
   const [tableData, setTableData] = useState<Review[]>([]);
 
+  // states for the edit modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editingReview, setEditingReview] = useState<Review | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    rating: 0,
+    review: "",
+  });
+
   useEffect(() => {
     getReviews();
   }, []);
+
+  // update form data when editingReview changes
+  useEffect(() => {
+    if (editingReview) {
+      setFormData({
+        name: editingReview.name,
+        address: editingReview.address,
+        rating: editingReview.rating,
+        review: editingReview.review,
+      });
+    }
+  }, [editingReview]);
 
   // get reviews from the database
   async function getReviews() {
     const response = await axios.get(`${baseUrl}`);
     const data = response.data;
     setTableData(data);
-  }
-
-  // TODO: on click => open edit wizard
-  async function editReviews(review?: Review) {
-    await axios.post(`${baseUrl}/editReviews`, {
-      data: {
-        review,
-      },
-    });
   }
 
   // delete a single or multiple reviews
@@ -60,6 +75,150 @@ export const ViewReviews = () => {
       }
     });
   }
+
+  const handleEdit = (review: Review) => {
+    setEditingReview(review);
+    setModalOpen(true);
+  };
+
+  // Close modal and reset form
+  const handleCancel = () => {
+    setModalOpen(false);
+    setEditingReview(null);
+    setFormData({ name: "", address: "", rating: 0, review: "" });
+  };
+
+  // Handle form input changes
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "rating" ? parseInt(value) || 0 : value,
+    }));
+  };
+
+  const handleUpdate = async () => {
+    if (!editingReview) {
+      return;
+    }
+
+    if (!formData.review.trim()) {
+      alert("Please fill in the review field");
+      return;
+    }
+
+    try {
+      await axios.put(`${baseUrl}/updateReview`, {
+        id: editingReview.id,
+        rating: formData.rating,
+        review: formData.review,
+      });
+
+      setTableData((prevData) =>
+        prevData.map((review) =>
+          review.id === editingReview.id
+            ? {
+                ...review,
+                rating: formData.rating,
+                review: formData.review,
+              }
+            : review
+        )
+      );
+
+      handleCancel();
+    } catch (error) {
+      console.error("Error updating review: ", error);
+      alert("Failed to update review. Please try again.");
+    }
+  };
+
+  const editModal = (
+    <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+      <div className=" my-4 w-11/12">
+        <span className="text-lg font-black text-gray-800">Edit Review</span>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Name
+          </label>
+          <input
+            disabled
+            type="text"
+            name="name"
+            value={formData.name}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Address
+          </label>
+          <input
+            disabled
+            type="text"
+            name="address"
+            value={formData.address}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Rating (1-5)
+          </label>
+          <select
+            name="rating"
+            value={formData.rating}
+            onChange={handleInputChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value={0}>Select rating</option>
+            <option value={1}>1 Star</option>
+            <option value={2}>2 Stars</option>
+            <option value={3}>3 Stars</option>
+            <option value={4}>4 Stars</option>
+            <option value={5}>5 Stars</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Review
+          </label>
+          <textarea
+            name="review"
+            value={formData.review}
+            onChange={handleInputChange}
+            rows={4}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleUpdate}
+            className="px-4 py-2 bg-green-300 text-white rounded-md hover:bg-indigo-700 flex items-center gap-2"
+          >
+            <Save size={16} />
+            Update
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
 
   // list of reviews
   const reviews = tableData.map((row, idx) => {
@@ -83,8 +242,9 @@ export const ViewReviews = () => {
               <BsPencilSquare
                 className="cursor-pointer align-middle"
                 key={`edit-${idx}`}
-                onClick={() => editReviews(row)}
+                onClick={() => handleEdit(row)}
               />
+
               <BsFillTrashFill
                 className=" cursor-pointer align-middle text-red-400"
                 key={`delete-${idx}`}
@@ -119,6 +279,7 @@ export const ViewReviews = () => {
           value="Delete All Reviews"
         />
         <Button value="Home" link="/" />
+        <div>{editModal}</div>
       </div>
     </>
   );
