@@ -221,8 +221,7 @@ export const ViewReviews = () => {
   );
 
   // list of reviews
-  let reviews = [];
-  reviews = tableData.map((row, idx) => {
+  const reviews = tableData?.map((row, idx) => {
     // generate the list of stars (ratings)
     const stars = [];
 
