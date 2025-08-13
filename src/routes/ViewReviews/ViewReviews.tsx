@@ -34,6 +34,7 @@ export const ViewReviews = () => {
   });
 
   useEffect(() => {
+    console.log("start");
     getReviews();
   }, []);
 
@@ -222,7 +223,8 @@ export const ViewReviews = () => {
 
   // list of reviews
   let reviews: any = [];
-  if (tableData.length != 0) {
+  console.log(tableData);
+  if (Array.isArray(tableData)) {
     reviews = tableData.map((row, idx) => {
       // generate the list of stars (ratings)
       const stars = [];
