@@ -34,4 +34,5 @@ Allows users to add reviews of their favorite restaurants and view them later on
 
 - fix google places api issue - migrate to the newer version
 - implement user authentication
+- restaurant recommender
 - allow users to sort reviews based on a set of criteria

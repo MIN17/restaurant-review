@@ -20,6 +20,7 @@ const baseUrl: string = isProduction
   ? import.meta.env.VITE_PROD_URL
   : import.meta.env.VITE_DEV_URL;
 
+// View Reviews component
 export const ViewReviews = () => {
   const [tableData, setTableData] = useState<Review[]>([]);
 
@@ -34,11 +35,10 @@ export const ViewReviews = () => {
   });
 
   useEffect(() => {
-    console.log("start");
     getReviews();
   }, []);
 
-  // update form data when editingReview changes
+  // update modal wizard form data when editingReview changes
   useEffect(() => {
     if (editingReview) {
       setFormData({
@@ -77,19 +77,20 @@ export const ViewReviews = () => {
     });
   }
 
+  // open the editing wizard modal
   const handleEdit = (review: Review) => {
     setEditingReview(review);
     setModalOpen(true);
   };
 
-  // Close modal and reset form
+  // close modal and reset form
   const handleCancel = () => {
     setModalOpen(false);
     setEditingReview(null);
     setFormData({ name: "", address: "", rating: 0, review: "" });
   };
 
-  // Handle form input changes
+  // handle form input changes
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -102,6 +103,7 @@ export const ViewReviews = () => {
     }));
   };
 
+  // update the review in the database
   const handleUpdate = async () => {
     if (!editingReview) {
       return;
@@ -138,6 +140,7 @@ export const ViewReviews = () => {
     }
   };
 
+  // code for edit wizard modal
   const editModal = (
     <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
       <div className=" my-4 w-11/12">
@@ -223,7 +226,9 @@ export const ViewReviews = () => {
 
   // list of reviews
   let reviews: any = [];
-  console.log(tableData);
+
+  // tableData can turn into an HTML in production for some reason,
+  // so this array check is needed
   if (Array.isArray(tableData)) {
     reviews = tableData.map((row, idx) => {
       // generate the list of stars (ratings)

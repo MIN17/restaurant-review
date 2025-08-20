@@ -34,7 +34,7 @@ export const AddReview = () => {
     });
   }
 
-  // update restaurant name or review content based on user input
+  // update form data based on user input
   function handleChange(
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) {
@@ -47,6 +47,7 @@ export const AddReview = () => {
     }));
   }
 
+  // insert the review into the database
   async function submitReview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     console.log(review.name, review.address, review.rating, review.review);
