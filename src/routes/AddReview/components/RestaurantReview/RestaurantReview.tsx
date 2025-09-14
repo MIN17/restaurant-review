@@ -12,7 +12,7 @@ export const RestaurantReview = (props: ReviewProps) => {
       <label>
         Review: <br />
         <textarea
-          className="flex min-h-[10rem] w-[95%] rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex min-h-[10rem] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           value={review}
           name="review"
           onChange={handleChange}

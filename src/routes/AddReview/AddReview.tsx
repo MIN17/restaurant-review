@@ -36,7 +36,7 @@ export const AddReview = () => {
 
   // update form data based on user input
   function handleChange(
-    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) {
     event.preventDefault();
     const { name, value } = event.target;
@@ -50,7 +50,6 @@ export const AddReview = () => {
   // insert the review into the database
   async function submitReview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(review.name, review.address, review.rating, review.review);
 
     await axios.post(`${baseUrl}/addReview`, {
       name: review.name,
@@ -76,7 +75,6 @@ export const AddReview = () => {
         <form className="w-4/6 md:w-1/2 lg:w-2/5" onSubmit={submitReview}>
           <RestaurantName
             name={review.name}
-            address={review.address}
             setReview={setReview}
             handleChange={handleChange}
           />
