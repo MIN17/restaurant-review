@@ -60,7 +60,7 @@ export const RestaurantName = ({
   };
 
   return (
-    <div className="mb-4 w-full">
+    <div className="mb-4 w-full relative">
       <span>Name: </span>
       <input
         name="name"
@@ -74,7 +74,7 @@ export const RestaurantName = ({
       {isDropdownOpen &&
         suggestions.status === "OK" &&
         suggestions.data.length > 0 && (
-          <div className="border border-gray-200 rounded-xl">
+          <div className="absolute bg-white w-full border border-gray-200 rounded-xl">
             {suggestions.data.map((suggestion, index) => (
               <button
                 key={index}
