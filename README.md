@@ -6,33 +6,39 @@ Allows users to add reviews of their favorite restaurants and view them later on
 
 ### Home Page
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/46b9ff6f-00db-4cef-9e41-dd6e1d66d0c4" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/2f154923-31ea-4a1b-adb1-bd9de5fb01d1" />
 
 ### Add Review Page
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c78ce92f-cb71-449b-85e6-648b59017c2a" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/e08492c5-6634-4788-abc2-3d539024448a" />
 
 #### Google Places Autocomplete API:
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/f54d1ac8-0ad0-4de9-abc4-962c0f5857c2" />
+Used a Google Places Autocomplete Hook for auto-suggestions
+- source : https://github.com/gstrobl/places-autocomplete-hook/tree/main?tab=readme-ov-file
 
-#### Rating selected:
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/1612c384-4a32-4f4f-b780-25072f9d5c8b" />
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/672363b6-86a0-4119-a0ab-44eb9bdb22b5" />
+#### Form Filled Out
+
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/8e3f790c-8785-454b-bd60-097f169d3aa2" />
 
 ### View Reviews Page
 
 #### width < 1024px:
 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/93ec41e6-01d2-4d27-a4f0-29ebc9dc991f" />
+<img width="873" height="820" alt="image" src="https://github.com/user-attachments/assets/484a224e-30ec-4161-a50f-95d938b547ff" />
 
 #### width >= 1024px:
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/e435b45d-b9b5-474c-a19f-4c1c7b6610b1" />
+<img width="1491" height="826" alt="image" src="https://github.com/user-attachments/assets/93dabd5c-788a-44e9-80a2-25e2d9e88200" />
+
+#### Edit Review
+
+<img width="1496" height="832" alt="image" src="https://github.com/user-attachments/assets/9fe459bd-0ae6-4baf-88fc-198a2a65adf3" />
+
 
 ## TODO
-
-- fix google places api issue - migrate to the newer version
 - implement user authentication
 - restaurant recommender
 - allow users to sort reviews based on a set of criteria
