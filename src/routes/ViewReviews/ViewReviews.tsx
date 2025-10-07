@@ -58,18 +58,18 @@ export const ViewReviews = () => {
   }
 
   // delete a single or multiple reviews
-  async function deleteReviews(review?: Review) {
+  async function deleteReviews(id?: Review["id"]) {
     await axios.delete(`${baseUrl}/deleteReviews`, {
       data: {
-        review,
+        id,
       },
     });
 
     // if a specific review is passed in, delete that review.
     // if not, delete all reviews.
     setTableData((prevData) => {
-      if (review) {
-        const newData = prevData.slice().filter((row) => row !== review);
+      if (id) {
+        const newData = prevData.slice().filter((row) => row.id !== id);
         return newData;
       } else {
         return [];
@@ -94,7 +94,7 @@ export const ViewReviews = () => {
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -129,8 +129,8 @@ export const ViewReviews = () => {
                 rating: formData.rating,
                 review: formData.review,
               }
-            : review
-        )
+            : review,
+        ),
       );
 
       handleCancel();
@@ -214,7 +214,7 @@ export const ViewReviews = () => {
           </button>
           <button
             onClick={handleUpdate}
-            className="px-4 py-2 bg-green-300 text-white rounded-md hover:bg-indigo-700 flex items-center gap-2"
+            className="px-4 py-2 bg-green-400 text-white rounded-md hover:bg-indigo-700 flex items-center gap-2"
           >
             <Save size={16} />
             Update
@@ -241,7 +241,7 @@ export const ViewReviews = () => {
       return (
         <div
           key={`row-${idx}`}
-          className="p-2 mb-2 lg:mb-0 border-solid border-[0.05rem] rounded-lg border-green-500"
+          className="p-2 mb-2 border-solid border-[0.05rem] rounded-lg border-green-500"
         >
           <div className="flex justify-between">
             <span>{row.name}</span>
@@ -257,7 +257,7 @@ export const ViewReviews = () => {
                 <BsFillTrashFill
                   className=" cursor-pointer align-middle text-red-400"
                   key={`delete-${idx}`}
-                  onClick={() => deleteReviews(row)}
+                  onClick={() => deleteReviews(row.id)}
                 />
               </div>
             </span>
@@ -276,14 +276,14 @@ export const ViewReviews = () => {
         <h1 className="mb-6 text-3xl font-bold">Reviews</h1>
         <div
           className={`
-					mb-7 w-10/12 md:w-1/2 xl:w-5/12 overflow-y-auto max-h-[25rem]	
+					mb-7 w-10/12 md:w-1/2 xl:w-5/12 overflow-y-auto max-h-[25rem]
 				`}
         >
-          <div className="lg:grid lg:grid-cols-2 lg:gap-4">{reviews}</div>
+          <div className="">{reviews}</div>
         </div>
         <Button
           className={`
-						bg-red-500 text-primary-foreground 
+						bg-red-500 text-primary-foreground
 					`}
           handleClick={() => deleteReviews()}
           value="Delete All Reviews"
