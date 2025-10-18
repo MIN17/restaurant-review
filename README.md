@@ -40,5 +40,6 @@ Used a Google Places Autocomplete Hook for auto-suggestions
 
 ## TODO
 - implement user authentication
+- use AI for documentation
 - restaurant recommender
 - allow users to sort reviews based on a set of criteria
