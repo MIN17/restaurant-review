@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import Root from "./routes/root";
-import { AddReview } from "./routes/AddReview";
-import { ViewReviews } from "./routes/ViewReviews";
-import { LoginPage } from "./routes/LoginPage";
-import { RegisterPage } from "./routes/RegisterPage";
+import {
+  AddReview,
+  ViewReviews,
+  LoginPage,
+  RegisterPage,
+  Root,
+} from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -35,5 +37,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

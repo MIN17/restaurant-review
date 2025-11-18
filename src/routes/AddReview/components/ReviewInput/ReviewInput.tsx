@@ -1,10 +1,10 @@
-interface ReviewProps {
+interface ReviewInputProps {
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   review: string;
 }
 
 // review portion of the input form in the AddReview page
-export const RestaurantReview = (props: ReviewProps) => {
+export default function ReviewInput(props: ReviewInputProps) {
   const { handleChange, review } = props;
 
   return (
@@ -20,4 +20,4 @@ export const RestaurantReview = (props: ReviewProps) => {
       </label>
     </div>
   );
-};
+}

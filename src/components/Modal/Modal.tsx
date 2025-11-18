@@ -6,7 +6,7 @@ interface Modal {
   children: any;
 }
 
-export const Modal = ({ open, onClose, children }: Modal) => {
+export default function Modal({ open, onClose, children }: Modal) {
   return (
     <div
       onClick={onClose}
@@ -33,4 +33,4 @@ export const Modal = ({ open, onClose, children }: Modal) => {
       </div>
     </div>
   );
-};
+}

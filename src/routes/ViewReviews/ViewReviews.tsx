@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "@/components/Button";
-import { Modal } from "@/components/Modal";
+import { Button, Modal } from "@/components";
+import { BASE_URL } from "@/utils/api";
+
+// icons
 import { Save } from "react-feather";
-import { BsFillTrashFill } from "react-icons/bs";
-import { BsPencilSquare } from "react-icons/bs";
+import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 
 interface Review {
   id: number;
@@ -14,14 +15,8 @@ interface Review {
   review: string;
 }
 
-// configure url path based on environment
-const isProduction = import.meta.env.PROD;
-const baseUrl: string = isProduction
-  ? import.meta.env.VITE_PROD_URL
-  : import.meta.env.VITE_DEV_URL;
-
 // View Reviews component
-export const ViewReviews = () => {
+export default function ViewReviews() {
   const [tableData, setTableData] = useState<Review[]>([]);
 
   // states for the edit modal
@@ -52,14 +47,14 @@ export const ViewReviews = () => {
 
   // get reviews from the database
   async function getReviews() {
-    const response = await axios.get(`${baseUrl}`);
+    const response = await axios.get(`${BASE_URL}`);
     const data = response.data;
     setTableData(data);
   }
 
   // delete a single or multiple reviews
   async function deleteReviews(id?: Review["id"]) {
-    await axios.delete(`${baseUrl}/deleteReviews`, {
+    await axios.delete(`${BASE_URL}/deleteReviews`, {
       data: {
         id,
       },
@@ -115,7 +110,7 @@ export const ViewReviews = () => {
     }
 
     try {
-      await axios.put(`${baseUrl}/updateReview`, {
+      await axios.put(`${BASE_URL}/updateReview`, {
         id: editingReview.id,
         rating: formData.rating,
         review: formData.review,
@@ -293,4 +288,4 @@ export const ViewReviews = () => {
       </div>
     </>
   );
-};
+}

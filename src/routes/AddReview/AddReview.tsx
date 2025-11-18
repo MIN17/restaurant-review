@@ -1,19 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import "@/index.css";
-import { RestaurantName } from "./components/RestaurantName";
-import { RestaurantRating } from "./components/RestaurantRating";
-import { RestaurantReview } from "./components/RestaurantReview";
-import { Button } from "@/components/Button";
-
-// configure url path based on environment
-const isProduction = import.meta.env.PROD;
-const baseUrl: string = isProduction
-  ? import.meta.env.VITE_PROD_URL
-  : import.meta.env.VITE_DEV_URL;
+import { RestaurantName, StarRating, ReviewInput } from "./components";
+import { Button } from "@/components";
+import { BASE_URL } from "@/utils/api";
 
 // handle adding review
-export const AddReview = () => {
+export default function AddReview() {
   const [review, setReview] = useState({
     name: "",
     address: "",
@@ -51,7 +43,7 @@ export const AddReview = () => {
   async function submitReview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await axios.post(`${baseUrl}/addReview`, {
+    await axios.post(`${BASE_URL}/addReview`, {
       name: review.name,
       address: review.address,
       rating: review.rating,
@@ -78,17 +70,13 @@ export const AddReview = () => {
             setReview={setReview}
             handleChange={handleChange}
           />
-          <RestaurantRating rating={review.rating} toggle={toggle} />
-          <RestaurantReview
-            review={review.review}
-            handleChange={handleChange}
-          />
+          <StarRating rating={review.rating} toggle={toggle} />
+          <ReviewInput review={review.review} handleChange={handleChange} />
           <Button value="Submit a review" type="submit" />
-          {/* <SubmitButton /> */}
           <hr className="m-0 mb-4" />
           <Button value="Home" link="/" />
         </form>
       </div>
     </>
   );
-};
+}

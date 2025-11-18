@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-interface Props {
+interface ButtonProps {
   value: string;
   type?: "submit" | "button";
   link?: string;
@@ -9,14 +9,14 @@ interface Props {
   noStyle?: boolean;
 }
 
-export const Button: React.FC<Props> = ({
+export default function Button({
   value,
   link,
   type = "button",
   handleClick,
   className,
   noStyle,
-}) => {
+}: ButtonProps) {
   const navigate = useNavigate();
 
   const to = (e: { preventDefault: () => void }) => {
@@ -55,4 +55,4 @@ export const Button: React.FC<Props> = ({
       {value}
     </button>
   );
-};
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/Button";
+import { Button } from "@/components";
 import axios from "axios";
 
 const isProduction = import.meta.env.PROD;
@@ -7,7 +7,7 @@ const baseUrl: string = isProduction
   ? import.meta.env.VITE_PROD_URL
   : import.meta.env.VITE_DEV_URL;
 
-export const RegisterPage = () => {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -74,4 +74,4 @@ export const RegisterPage = () => {
       </div>
     </>
   );
-};
+}

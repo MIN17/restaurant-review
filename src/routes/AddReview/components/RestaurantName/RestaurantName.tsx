@@ -20,11 +20,11 @@ interface RestaurantNameProp {
 }
 
 // restaurant name portion of the input form in the AddReview page
-export const RestaurantName = ({
+export default function RestaurantName({
   name,
   setReview,
   handleChange,
-}: RestaurantNameProp) => {
+}: RestaurantNameProp) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Place Autocomplete API
@@ -42,7 +42,7 @@ export const RestaurantName = ({
     });
 
   // update review state as the user types
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
     setValue(e.target.value);
     setIsDropdownOpen(true);
@@ -97,7 +97,7 @@ export const RestaurantName = ({
         )}
     </div>
   );
-};
+}
 
 // restaurant name portion of the input form in the AddReview page
 // export const RestaurantName = ({
