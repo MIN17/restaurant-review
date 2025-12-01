@@ -2,6 +2,13 @@
 
 Allows users to add reviews of their favorite restaurants and view them later on. Users can also edit or delete the reviews.
 
+## TODO
+- add global state management (Zustand)
+- implement user authentication
+- restaurant recommender
+- allow users to sort reviews based on a set of criteria
+
+
 ## Screenshots
 
 ### Home Page
@@ -36,9 +43,3 @@ Used a Google Places Autocomplete Hook for auto-suggestions
 #### Edit Review
 
 <img width="1496" height="832" alt="image" src="https://github.com/user-attachments/assets/9fe459bd-0ae6-4baf-88fc-198a2a65adf3" />
-
-
-## TODO
-- implement user authentication
-- restaurant recommender
-- allow users to sort reviews based on a set of criteria

@@ -1,4 +1,5 @@
 import { X } from "react-feather";
+import { createPortal } from "react-dom";
 
 interface Modal {
   open: boolean;
@@ -7,7 +8,7 @@ interface Modal {
 }
 
 export default function Modal({ open, onClose, children }: Modal) {
-  return (
+  return createPortal(
     <div
       onClick={onClose}
       className={`
@@ -31,6 +32,7 @@ export default function Modal({ open, onClose, children }: Modal) {
         </button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
