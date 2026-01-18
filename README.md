@@ -1,12 +1,106 @@
-# Restaurant Review App
+# Restaurant Review App - Frontend
 
-Allows users to add reviews of their favorite restaurants and view them later on. Users can also edit or delete the reviews.
+A modern React application that allows users to discover, review, and manage their favorite restaurants. Built with React, TypeScript, and Tailwind CSS, featuring Google Places integration for seamless restaurant search.
+
+## Tech Stack
+
+- **Framework:** React 18.3.1 with TypeScript 5.9.2
+- **Build Tool:** Vite 5.3.4
+- **Styling:** Tailwind CSS 3.4.7 with custom theme
+- **Routing:** React Router DOM 6.25.0
+- **Form Management:** React Hook Form 7.53.1 with Zod 3.23.8 validation
+- **UI Components:** Radix UI primitives with custom components
+- **Icons:** Lucide React, React Feather, React Icons
+- **HTTP Client:** Axios 1.7.4
+- **Location Services:** Google Places API with places-autocomplete-hook
+- **Code Quality:** Biome 1.8.3 (linter & formatter)
+
+## Features
+
+- User authentication (register/login) with JWT
+- Protected routes for authenticated users
+- Add restaurant reviews with Google Places autocomplete
+- Interactive 5-star rating system
+- View all reviews in a responsive list layout
+- Edit existing reviews via modal interface
+- Delete individual reviews or all reviews at once
+- Responsive design (mobile-first with custom breakpoints)
+- Dark mode support with CSS variables
+- Type-safe codebase with TypeScript
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn package manager
+- Google Places API key
+
+### Installation
+
+```bash
+npm i
+```
+
+### Environment Variables
+
+Create a `.env` file in the frontend directory:
+
+```env
+VITE_API_KEY=your_google_places_api_key
+VITE_DEV_URL=http://localhost:3000
+VITE_PROD_URL=https://your-backend-url.com
+```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+### Build
+
+Build for production:
+```bash
+npm run build
+```
+
+Preview production build:
+```bash
+npm run preview
+```
+
+
+## Routes
+
+| Route | Component | Description | Protected |
+|-------|-----------|-------------|-----------|
+| `/` | Root | Home page with navigation | No |
+| `/login` | LoginPage | User login form | No |
+| `/register` | RegisterPage | User registration form | No |
+| `/addReview` | AddReview | Create new review | Yes |
+| `/reviews` | ViewReviews | View/edit/delete reviews | Yes |
+
+
+## Authentication
+- Context API-based auth state management
+- JWT tokens stored in HTTP-only cookies
+- Automatic redirect to login for protected routes
+- Persistent auth state across page reloads
 
 ## TODO
-- add global state management (Zustand)
-- implement user authentication
-- restaurant recommender
-- allow users to sort reviews based on a set of criteria
+- Pagination
+- Validation
+- Allow users to sort reviews based on criteria
+- Add global state management (Zustand)
+- Implement restaurant recommender
+- Add review search and filtering
+- Implement user profile page
+- Add image upload for reviews
 
 
 ## Screenshots
